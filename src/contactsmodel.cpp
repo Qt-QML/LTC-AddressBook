@@ -80,8 +80,9 @@ bool ContactsModel::updateContacts()
     std::tie(success, contactsResult) = m_reader.requestContactsBrowse();
 
     if (success) {
+        emit beginResetModel();
         m_contacts = std::move(contactsResult);
-        emit dataChanged(createIndex(0, 0), createIndex(rowCount({}), 0));
+        emit endResetModel();
     }
 
     return success;
